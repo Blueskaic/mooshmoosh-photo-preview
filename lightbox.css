@@ -1,0 +1,60 @@
+/* Shared fullscreen viewer. Loaded last so every site concept uses the same gallery. */
+dialog.lightbox{
+  position:fixed;inset:0;width:100vw;height:100vh;height:100dvh;
+  max-width:none;max-height:none;margin:0;padding:0;border:0;border-radius:0;
+  background:#111110;color:#eeeee8;overflow:hidden;
+  font-family:"Assistant",Arial,sans-serif;line-height:1.5;
+}
+dialog.lightbox[open]{display:grid;grid-template-rows:68px minmax(0,1fr);animation:viewer-arrive 160ms ease-out}
+dialog.lightbox:not([open]){display:none}
+dialog.lightbox::backdrop{background:#111110;backdrop-filter:none}
+.lightbox .lightbox-header{
+  display:flex;align-items:center;justify-content:space-between;direction:ltr;
+  padding:env(safe-area-inset-top,0px) 28px 0;min-width:0;
+}
+.lightbox .lightbox-wordmark{font-family:"Frank Ruhl Libre",Georgia,serif;font-size:19px;font-weight:300;letter-spacing:.025em;line-height:1}
+.lightbox .lightbox-close{
+  position:relative;inset:auto;display:grid;place-items:center;flex:0 0 44px;
+  width:44px;height:44px;margin:0;padding:0;border:0;border-radius:0;
+  background:transparent;color:#eeeee8;cursor:pointer;z-index:1;
+}
+.lightbox .lightbox-close span{position:relative;display:block;width:22px;height:22px}
+.lightbox .lightbox-close span::before,.lightbox .lightbox-close span::after{content:"";position:absolute;left:0;top:10px;width:22px;height:1.4px;background:currentColor;transform:rotate(45deg)}
+.lightbox .lightbox-close span::after{transform:rotate(-45deg)}
+.lightbox .lightbox-figure{display:grid;grid-template-rows:minmax(0,1fr) auto;min-width:0;min-height:0;margin:0;padding:0}
+.lightbox .lightbox-stage{display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;padding:4px 86px 22px}
+.lightbox #lightbox-image{
+  display:block;flex:0 1 auto;width:auto;height:auto;max-width:100%;max-height:100%;
+  margin:0;padding:0;border:0;border-radius:0;object-fit:contain;box-shadow:none;
+}
+.lightbox .lightbox-footer{
+  display:flex;justify-content:space-between;align-items:center;gap:24px;
+  min-height:57px;margin:0 32px;padding:14px 0 max(14px,env(safe-area-inset-bottom,0px));
+  border-top:1px solid #ffffff25;color:#bdbdb4;font-size:11px;font-weight:400;
+  letter-spacing:.02em;line-height:1.5;text-align:right;
+}
+.lightbox #photo-counter{flex-shrink:0;font-size:11px;letter-spacing:.16em;font-variant-numeric:tabular-nums;color:#d0d0c7}
+.lightbox .lightbox-arrow{
+  position:absolute;top:calc(50% - 22px);display:grid;place-items:center;
+  width:48px;height:48px;padding:0;margin:0;border:0;border-radius:0;
+  color:#eeeee8;background:transparent;cursor:pointer;direction:ltr;
+}
+.lightbox .lightbox-previous{left:20px}.lightbox .lightbox-next{right:20px}
+.lightbox .lightbox-arrow span{display:block;width:19px;height:19px;border-top:1.5px solid currentColor;border-right:1.5px solid currentColor}
+.lightbox .lightbox-previous span{transform:rotate(-135deg)}.lightbox .lightbox-next span{transform:rotate(45deg)}
+.lightbox .lightbox-close:hover,.lightbox .lightbox-arrow:hover{background:#ffffff0a;color:#fff}
+.lightbox button:focus-visible{outline:1px solid #eeeee8;outline-offset:-3px}
+@keyframes viewer-arrive{from{opacity:0}to{opacity:1}}
+@media(max-width:760px){
+  dialog.lightbox[open]{grid-template-rows:calc(62px + env(safe-area-inset-top,0px)) minmax(0,1fr)}
+  .lightbox .lightbox-header{padding-inline:16px}
+  .lightbox .lightbox-wordmark{font-size:18px}
+  .lightbox .lightbox-stage{padding:4px 16px 14px}
+  .lightbox .lightbox-footer{min-height:calc(76px + env(safe-area-inset-bottom,0px));margin-inline:16px;padding:12px 52px max(12px,env(safe-area-inset-bottom,0px));flex-direction:column;justify-content:center;gap:5px;font-size:10px;text-align:center}
+  .lightbox #photo-counter{font-size:10px;letter-spacing:.14em}
+  .lightbox .lightbox-arrow{top:auto;bottom:calc(16px + env(safe-area-inset-bottom,0px));width:44px;height:44px}
+  .lightbox .lightbox-previous{left:15px}.lightbox .lightbox-next{right:15px}
+  .lightbox .lightbox-arrow span{width:16px;height:16px}
+}
+@media(max-height:480px) and (min-width:761px){dialog.lightbox[open]{grid-template-rows:50px minmax(0,1fr)}.lightbox .lightbox-footer{min-height:40px;padding-block:8px}.lightbox .lightbox-stage{padding-bottom:10px}}
+@media(prefers-reduced-motion:reduce){dialog.lightbox[open]{animation:none}}
